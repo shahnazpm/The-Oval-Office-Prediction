@@ -1,3 +1,8 @@
+--Connection
+end point: database-1.c9yu6e2kc5gy.us-east-2.rds.amazonaws.com
+username: admin
+password: Loyalist123
+
 --business table create
 
 CREATE TABLE Business_Data
