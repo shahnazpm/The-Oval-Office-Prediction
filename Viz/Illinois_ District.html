@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Expires" content="Thu, 01 Jan 1970 00:00:00 GMT" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, maximum-scale=2.0" />          
+      <script type="text/javascript">
+          //<![CDATA[
+          var dataLayer = window.dataLayer = window.dataLayer || [];
+          dataLayer.push({
+              'Application': 'Tableau Public',
+              'Realm': 'viz embed'
+          });
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-WP98PN');
+          (function() {
+              var svgSupported = (window.SVGSVGElement) ? true : false;
+              var performanceSupported = (window.performance && performance.timing ) ? true: false;
+              dataLayer.push({'svgSupported': svgSupported});
+              dataLayer.push({'performanceSupported': performanceSupported});
+          }())
+          //]]>
+      </script>
+              <title>Tableau</title>
+    <style type="text/css">
+    html {
+     height: 100%;
+    }
+    body {
+     position: absolute;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     top: 0;
+     margin: 0;
+     padding: 0;
+    }
+    #tabBootErr {
+     display: none;
+     position: absolute;
+     top: 100px;
+     width: 300px;
+     left: 50%;
+     margin-left: -150px;
+     border: 1px solid black;
+     background: white;
+     padding: 0;
+     box-shadow: 0px 5px 10px #adadad;
+     font-family: Arial, Helvetica, sans-serif;
+     z-index:999;
+    }
+    #tabBootErrTitle {
+     font-size: 11pt;
+     font-weight: bold;
+     color: #1F437D;
+     background-color: #EBEEF3;
+     padding: 5px 6px 3px 6px;
+    }
+    #tabBootErrBody{
+     overflow: auto;
+     color: #333333;
+     font-size: 10pt;
+     font-weight: normal;
+     background: white;
+     border: none;
+     border-top: 1px solid black;
+     padding: 10px;
+     -moz-user-select: text;
+     -webkit-user-select: text;
+     -ms-user-select: text;
+     user-select: text;
+    }
+    #tabBootErrMsg {
+     white-space: pre-line;
+    }
+    #main-content:focus {
+     border: 1px solid #3498DB;
+    }
+
+    </style>
+    <script src="https://public.tableau.com/vizql/v_202422409041456/javascripts/PreBootstrap.min.js" crossorigin="anonymous" async=true></script>
+    <link href="https://public.tableau.com/vizql/v_202422409041456/javascripts/built-dojo/tableau/web/css/tableau.css" media="all" rel="Stylesheet"
+        type="text/css" />
+
+    <link href="https://public.tableau.com/vizql/v_202422409041456/css/vqlweb.css" rel="Stylesheet" type="text/css"/>
+</head>
+<body class="tundra tableau">
+      <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WP98PN"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <!-- End Google Tag Manager (noscript) -->
+    <iframe id="primaryContent" scrolling="no" frameborder="0" style="display:none"></iframe>
+    <a id=primaryContentLink style="display:none"></a>
+    <style>
+      #loadingSpinner {
+        top: 100px;
+        left: 0;
+        right: 0;
+        position: fixed;
+        z-index: 991;
+        display: flex;
+        justify-content: center;
+        cursor: wait;
+      }
+
+      #svg-spinner-container {
+        width: 65px;
+        height: 65px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #svg-spinner {
+        width: 50px;
+        height: 50px;
+        -webkit-animation: svg-spinner-animation 1s linear infinite;
+        animation: svg-spinner-animation 1s linear infinite;
+      }
+
+      @-webkit-keyframes svg-spinner-animation {
+        100% {
+          -webkit-transform:rotate(360deg);
+        }
+      }
+
+      @keyframes svg-spinner-animation {
+        100% {
+          transform:rotate(360deg);
+        }
+      }
+
+      #loadingGlassPane {
+        background-color: #EBEBEB;
+        opacity: 0.24;
+      }
+    </style>
+
+    <div id="initializing_thin_client" class="wcBody">
+        <div id="loadingSpinner" style="display:none">
+          <div id="svg-spinner-container">
+            <svg id="svg-spinner" viewBox="0 0 50 50"><style>#tail{fill:url(#fade)}#head{fill:#616570}stop{stop-color:#616570}</style><linearGradient id="fade" x2="50" y1="25" y2="25" gradientUnits="userSpaceOnUse"><stop offset="0" stop-opacity="0"/><stop offset=".15" stop-opacity=".04"/><stop offset=".3" stop-opacity=".16"/><stop offset=".45" stop-opacity=".36"/><stop offset=".61" stop-opacity=".64"/><stop offset=".76"/></linearGradient><path id="head" d="M0 25a25 25 0 1 0 50 0h-3.9a21.1 21.1 0 1 1-42.2 0" /><path id="tail" d="M50 25a25 25 0 0 0-50 0h3.9a21.1 21.1 0 1 1 42.2 0" /></svg>
+          </div>
+        </div>
+        <div class="wcGlassPane" style="display:none" id="loadingGlassPane"></div>
+    </div>
+    <div id="centeringContainer">
+        <div class="wcStaticImage" id="staticImage" style="display:none"></div>
+        <div id="tabBootErr" class="tabErrorDialog">
+            <div id="tabBootErrTitle">Unexpected Error</div>
+            <div id="tabBootErrBody">An unexpected error occurred. If you continue to receive this error please contact
+                your Tableau Server Administrator.<div id="tabBootErrMsg"></div>
+            </div>
+        </div>
+        <div class='tabbedNavigationWrapper' id='tab-container'>
+        </div>
+        <div id='viz-client-container'>
+            <div id='toolbar-container'></div>
+            <div id='main-content'>
+            </div>
+        </div>
+
+    </div>
+
+    <div style="display: none;">
+        <textarea id="tsConfigContainer"></textarea>
+    </div>
+    <div style="display: none;">
+        <textarea id="staticConfigContainer">
+        {
+          "isAuthoring": false,
+          "isJsDebug": false,
+          "isMobile": false,
+          "isOffline": false,
+          "isPublic": true,
+          "isSalesforceNative": false,
+          "parentFrameOrigin": "",
+          "publicGalleryLink": "https://public.tableau.com/s/gallery",
+          "showPagePathPrefix": "",
+          "vizqlPrefix": "vizql"
+        }
+        </textarea>
+    </div>
+</body>
+</html>
