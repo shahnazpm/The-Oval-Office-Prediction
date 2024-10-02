@@ -1,0 +1,69 @@
+# Set the working directory
+setwd("/Users/obianujuanuma/Library/CloudStorage/OneDrive-Personal/Loyalist/Semester 2/Step2")
+# Import libraries
+library(readxl)
+library(shiny)
+library(plotly)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# Define server logic required to output a boxplot
+server <- function(input, output, session) {
+  
+  # Import the data
+  nc = read_xlsx("North_Carolina_District_all.xlsx", 
+                  sheet = "North_Carolina_District_all",col_names = TRUE)
+  
+  
+  # Exclude MOE columns
+  nc1 = nc[,!grepl("MOE$",names(nc))]
+  
+  #Remove rows with totals
+  nc1 = nc1[!grepl("Total population|All people", nc1$Title),]
+  
+  # Unpivot the district columns
+  unpivoted_nc1 = nc1 %>% 
+    pivot_longer(
+      colnames(nc1)[4:17]
+      ,names_to = "District"
+      ,values_to = "Population"
+      ,values_drop_na = TRUE
+    )
+  
+  data <- reactive({
+    req(input$sel_Subject)  # Ensure sel_Subject is selected
+    df <- unpivoted_nc1 %>%
+      filter(Subject %in% input$sel_Subject) %>%
+      group_by(District) %>%
+      summarise(Population = sum(Population))  # Sum population
+    df  # Return df at the end of the reactive block
+  })
+  
+  observe({
+    updateSelectInput(session, "sel_Subject", choices = unpivoted_nc1$Subject)
+  })
+  
+  # Create the plot
+  output$plot <- renderPlot({
+    # fig <- plot_ly(data(), y = ~Population, x = ~Topic, type = "box")
+    g <- ggplot(data(), aes(y = Population, x = District))
+    g + geom_histogram(stat = "sum") 
+    
+  })
+  
+}
+
+ui <- basicPage(
+  h4("Dynamic Comparison of Voting Influencers Across Districts"),
+  selectInput(inputId = "sel_Subject",
+              label = "Choose Subject",
+              choices = "Names",
+              multiple = TRUE,  # allow multiple selections if needed
+                ),  
+  plotOutput("plot")
+  
+)
+
+# Run the application 
+shinyApp(ui = ui, server = server)
